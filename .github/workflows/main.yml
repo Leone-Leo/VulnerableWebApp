@@ -19,7 +19,7 @@ jobs:
         args: upgrade
 
     - name: Generate Alerts
-      uses: actions/bin/filter@v2
+      uses: actions/bin/filter@v1
       with:
         args: dependabot-upgrade
         severity: warning
@@ -27,7 +27,7 @@ jobs:
 
     - name: Send Alerts
       if: steps.filter.outputs.alerts
-      uses: actions/email@v2
+      uses: ncipollo/send-email-action@v1
       with:
         to: geysonleone@gmail.com
         subject: Dependabot Alerts

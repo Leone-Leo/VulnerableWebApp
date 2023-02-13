@@ -21,8 +21,9 @@ jobs:
         autoupdate: 'false'
         
     - name: Send email notification
-      uses: Leone-Leo/email-action@v2
+      uses: ncipollo/send-email-action@v1
       with:
         to: 'geysonleone@gmail.com'
         subject: 'Dependabot results'
         body: 'Dependabot found and fixed security vulnerabilities in your code.'
+

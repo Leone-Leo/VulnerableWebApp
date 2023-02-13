@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI/CD pipeline
 
 on:
   push:
@@ -8,27 +8,21 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Run Dependabot
-      uses: dependabot/actions/dependabot-core@v1
+      uses: dependabot/actions/dependabot-core@v2
       with:
-        args: upgrade
-
-    - name: Generate Alerts
-      uses: actions/bin/filter@v1
+        schedule: 'daily'
+        labels: 'security'
+        autoupdate: 'false'
+        
+    - name: Send email notification
+      uses: stefanzweifel/email-action@v2
       with:
-        args: dependabot-upgrade
-        severity: warning
-      id: filter
-
-    - name: Send Alerts
-      if: steps.filter.outputs.alerts
-      uses: actions/email@v2
-      with:
-        to: admin@example.com
-        subject: Dependabot Alerts
-        body: ${{ toJson(steps.filter.outputs.alerts) }}
+        to: 'you@example.com'
+        subject: 'Dependabot results'
+        body: 'Dependabot found and fixed security vulnerabilities in your code.'

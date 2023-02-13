@@ -19,7 +19,7 @@ jobs:
         args: upgrade
 
     - name: Generate Alerts
-      uses: actions/bin/filter@v1
+      uses: actions/bin/filter@v2
       with:
         args: dependabot-upgrade
         severity: warning

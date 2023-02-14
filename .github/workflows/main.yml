@@ -11,14 +11,36 @@ jobs:
 
     steps:
     - name: Checkout
+      uses: actions/checkout@v3.3.
+      name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
       uses: actions/checkout@v3.3.0
-      version: 2
-updates:
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "daily"
+  
+    - name: Fetch Metadata from Dependabot PRs
+      uses: dependabot/fetch-metadata@v1.3.6
+
+    - name: Generate Alerts
+      uses: actions/bin/filter@v1
+      with:
+        args: dependabot-upgrade
+        severity: warning
+      id: filter
+
+    - name: Send Alerts
+      if: steps.filter.outputs.alerts
+      uses: actions/email@v2
+      with:
+        to: geysonleone@gmail.com
+        subject: Dependabot Alerts
+        body: ${{ toJson(steps.filter.outputs.alerts) }}

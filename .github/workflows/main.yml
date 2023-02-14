@@ -12,12 +12,14 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3.3.0
-  
-    - name: Fetch Metadata from Dependabot PRs
-  uses: dependabot/fetch-metadata@v1.3.6
+
+    - name: Run Dependabot
+      uses: dependabot/actions/dependabot-core@v1
+      with:
+        args: upgrade
 
     - name: Generate Alerts
-      uses: actions/bin/filter@v1
+      uses: actions/bin/filter@v2
       with:
         args: dependabot-upgrade
         severity: warning
@@ -25,7 +27,7 @@ jobs:
 
     - name: Send Alerts
       if: steps.filter.outputs.alerts
-      uses: ncipollo/send-email-action@v1
+      uses: actions/email@v2
       with:
         to: geysonleone@gmail.com
         subject: Dependabot Alerts

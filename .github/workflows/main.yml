@@ -13,10 +13,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3.3.0
 
-      - name: Fetch Metadata from Dependabot PRs
-        uses: dependabot/fetch-metadata@v1.3.6
-
-      - name: Run Dependabot
-        uses: dependabot/actions/dependabot-core@v1.3.6
-        with:
-          args: upgrade
+      - name: Query Dependabot Alerts 
+        uses: pwned-17/check-dependabot@v1.2.9

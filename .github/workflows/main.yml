@@ -15,3 +15,6 @@ jobs:
 
       - name: Query Dependabot Alerts 
         uses: pwned-17/check-dependabot@v1.2.9
+        
+      - name: Github Actions Alerts
+        uses: github-suraj/git-action-alerts@2021.03

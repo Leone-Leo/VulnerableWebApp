@@ -27,8 +27,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3.3.0
   
-    - name: Fetch Metadata from Dependabot PRs
-      uses: dependabot/fetch-metadata@v1.3.6
+    - name: Dependabot metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@v1.1.1
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
 
     - name: Generate Alerts
       uses: actions/bin/filter@v1

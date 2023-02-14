@@ -11,13 +11,12 @@ jobs:
 
     steps:    
       - name: Checkout
-    uses: actions/checkout@v3.3.0
-  
- 
+        uses: actions/checkout@v3.3.0
+
       - name: Fetch Metadata from Dependabot PRs
-     uses: dependabot/fetch-metadata@v1.3.6
+        uses: dependabot/fetch-metadata@v1.3.6
 
       - name: Run Dependabot
-    uses: dependabot/actions/dependabot-core@v1.3.6
-    with:
-      args: upgrade
+        uses: dependabot/actions/dependabot-core@v1.3.6
+        with:
+          args: upgrade

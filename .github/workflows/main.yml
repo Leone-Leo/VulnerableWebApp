@@ -9,12 +9,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v3.3.
+    steps:    
+      - name: Checkout
+    uses: actions/checkout@v3.3.0
   
-    - name: Dependabot metadata
-        id: dependabot-metadata
-        uses: dependabot/fetch-metadata@v1.1.1
-        with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+ 
+      - name: Fetch Metadata from Dependabot PRs
+     uses: dependabot/fetch-metadata@v1.3.6
+
+      - name: Run Dependabot
+    uses: dependabot/actions/dependabot-core@v1.3.6
+    with:
+      args: upgrade

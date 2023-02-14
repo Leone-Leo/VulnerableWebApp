@@ -13,10 +13,14 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3.3.0
 
-    - name: Run Dependabot
-      uses: dependabot/actions/dependabot-core@v1
-      with:
-        args: upgrade
+    version: 2
+    updates:
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
 
     - name: Generate Alerts
       uses: actions/bin/filter@v2

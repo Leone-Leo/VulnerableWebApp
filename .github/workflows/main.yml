@@ -32,18 +32,3 @@ jobs:
         uses: dependabot/fetch-metadata@v1.1.1
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
-
-    - name: Generate Alerts
-      uses: actions/bin/filter@v1
-      with:
-        args: dependabot-upgrade
-        severity: warning
-      id: filter
-
-    - name: Send Alerts
-      if: steps.filter.outputs.alerts
-      uses: actions/email@v2
-      with:
-        to: geysonleone@gmail.com
-        subject: Dependabot Alerts
-        body: ${{ toJson(steps.filter.outputs.alerts) }}

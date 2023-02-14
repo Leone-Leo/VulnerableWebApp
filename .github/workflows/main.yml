@@ -10,13 +10,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Run Dependabot
-      uses: dependabot/actions/dependabot-core@v1
-      with:
-        args: upgrade
+    - name: Checkout
+      uses: actions/checkout@v3.3.0
+  
+    - name: Fetch Metadata from Dependabot PRs
+  uses: dependabot/fetch-metadata@v1.3.6
 
     - name: Generate Alerts
       uses: actions/bin/filter@v1
